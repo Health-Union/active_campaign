@@ -1,0 +1,383 @@
+defmodule ActiveCampaign.Contact do
+  @moduledoc """
+  Documentation for `ActiveCampaign.Contact`.
+  """
+
+  alias ActiveCampaign.Http
+
+  @doc """
+  Create a contact
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.create(%{
+        email: "johndoe@example.com",
+        firstName: "John",
+        lastName: "Doe",
+        phone: "7223224241"
+      })
+      {:ok, %{"contact" => %{...}}}
+  """
+  @spec create(map()) :: {:ok, map()} | {:error, any()}
+  def create(data) do
+    Http.post("contacts", %{contact: data})
+  end
+
+  @doc """
+  Sync a contact's data
+  """
+  def sync(data) do
+    Http.post("contacts/sync", %{contact: data})
+  end
+
+  @doc """
+  Retrieve a contact
+
+  ## Examples
+      iex> ActiveCampaign.Contact.get(123)
+      {:ok, %{"contactDatum" => %{...}}}
+  """
+  @spec get(integer()) :: {:ok, map()} | {:error, any()}
+  def get(id) do
+    contact_get("#{id}/contactData")
+  end
+
+  @doc """
+  Update list status for a contact
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.update_list_status(%{
+        list: 2,
+        contact: 1,
+        status: 1
+      })
+      # FIXME
+      {:ok, %{"message" => "Updated"}}
+  """
+  def update_list_status(data) do
+    Http.post("contactLists", %{"contactList" => data})
+  end
+
+  @doc """
+  Update a contact
+  """
+  def update(id, data) do
+    Http.put("contacts/#{id}", %{contact: data})
+  end
+
+  @doc """
+  Delete a contact
+  """
+  def delete(id) do
+    Http.delete("contacts/#{id}")
+  end
+
+  @doc """
+  List, search, and filter contacts
+  """
+  def search(data) do
+    # %{
+    #   ids: [1, 2, 3],
+    #   eamil: "",
+    #   email_like: "",
+    #   exclude: 1,
+    #   formid: 123,
+    #   id_greater: 2,
+    #   id_less: 5,
+    #   listid: 1,
+    #   search: "",
+    #   segmentid: 1,
+    #   seriesid: 1,
+    #   status: 1,
+    #   tagid: 1,
+    #   filters: %{
+    #     created_before: date,
+    #     created_after: date,
+    #     updated_before: date,
+    #     updated_after: date
+    #   },
+    #   waitid: 1,
+    #   orders: [
+    #     email: :asc,
+    #     first_name: :asc,
+    #     last_name: :asc,
+    #     name: :asc,
+    #     score: :asc
+    #   ],
+    #   in_group_lists: true
+    # }
+
+    query =
+      data
+      |> Enum.into([])
+      |> Kernel.++(Enum.into(data[:ids] || [], [], fn id -> {:"ids[]", id} end))
+      |> Keyword.drop([:ids])
+      |> URI.encode_query()
+
+    Http.get("contacts?#{query}")
+  end
+
+  @doc """
+  List all automations the contact is in
+  """
+  def list_automations(id) do
+    contact_get("#{id}/contactAutomations")
+  end
+
+  @doc """
+  Retrieve a contact's score value
+  """
+  def get_score(id) do
+    contact_get("#{id}/scoreValues")
+  end
+
+  @doc """
+  Bulk import contacts
+  """
+  def bulk_import() do
+    # FIXME
+  end
+
+  @doc """
+  Bulk import status list
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.bulk_import_status_list()
+      {:ok, %{"outstanding" => [], "recentlyCompleted" => []}}
+  """
+
+  @spec bulk_import_status_list() :: {:ok, map()} | {:error, any()}
+  def bulk_import_status_list do
+    Http.get("import/bulk_import")
+  end
+
+  @doc """
+  Bulk import status info
+  """
+  def bulk_import_status_info(data \\ []) do
+    Http.get("import/info")
+  end
+
+  @doc """
+  List all contact activities
+
+  %{
+    contact: integer(),
+    after: Date.t(),
+    include: String.t(),
+    emails: boolean(),
+    orders: %{
+      tstamp: ASC
+    }
+  }
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.update_list_status(contact: 123)
+      {:ok, %{"activities" => [], "meta" => %{"total" => "0"}}}
+  """
+  @spec list_activity(map()) :: {:ok, map()} | {:error, any()}
+  def list_activity(data) do
+    query =
+      data
+      |> Enum.into([])
+      |> URI.encode_query()
+
+    Http.get("activities?#{query}")
+  end
+
+  @doc """
+  Retrieve a contact's bounce logs
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_bounce_logs(123)
+      {:ok, %{"bounceLogs" => []}}
+  """
+  @spec get_bounce_logs(integer()) :: {:ok, map()} | {:error, any()}
+  def get_bounce_logs(id) do
+    contact_get("#{id}/bounceLogs")
+  end
+
+  @doc """
+  Retrieve a contact's data
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_data(123)
+      {:ok, %{"contactDatum" => %{...}}}
+  """
+  @spec get_data(integer()) :: {:ok, map()} | {:error, any()}
+  def get_data(id) do
+    contact_get("#{id}/contactData")
+  end
+
+  @doc """
+  Retrieve a contact's goals
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_goals(123)
+      {:ok, %{"contactGoals" => []}}
+  """
+  @spec get_goals(integer()) :: {:ok, map()} | {:error, any()}
+  def get_goals(id) do
+    contact_get("#{id}/contactGoals")
+  end
+
+  @doc """
+  Retrieve a contact's list memberships
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_list_memberships(123)
+      {:ok, %{"contactLists" => []}}
+  """
+  @spec get_list_memberships(integer()) :: {:ok, map()} | {:error, any()}
+  def get_list_memberships(id) do
+    contact_get("#{id}/contactLists")
+  end
+
+  @doc """
+  Retrieve a contact's logs
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_logs(123)
+      {:ok, %{"contactLogs" => []}}
+  """
+  @spec get_logs(integer()) :: {:ok, map()} | {:error, any()}
+  def get_logs(id) do
+    contact_get("#{id}/contactLogs")
+  end
+
+  @doc """
+  Retrieve a list of contact's deals
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_contact_deals(123)
+      {:ok, %{"contactDeals" => []}}
+  """
+  @spec get_contact_deals(integer()) :: {:ok, map()} | {:error, any()}
+  def get_contact_deals(id) do
+    contact_get("#{id}/contactDeals")
+  end
+
+  @doc """
+  Retrieve a contact's deals
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_deals(123)
+      {:ok, %{"deals" => []}}
+  """
+  @spec get_deals(integer()) :: {:ok, map()} | {:error, any()}
+  def get_deals(id) do
+    contact_get("#{id}/deals")
+  end
+
+  @doc """
+  Retrieve a contact's field values
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_deals(123)
+      {:ok, %{"fieldValues" => []}}
+  """
+  @spec get_field_values(integer()) :: {:ok, map()} | {:error, any()}
+  def get_field_values(id) do
+    contact_get("#{id}/fieldValues")
+  end
+
+  @doc """
+  Retrieve a contacts geo ips
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_geo_ips(123)
+      {:ok, %{"geoIps" => []}}
+  """
+  @spec get_geo_ips(integer()) :: {:ok, map()} | {:error, any()}
+  def get_geo_ips(id) do
+    contact_get("#{id}/geoIps")
+  end
+
+  @doc """
+  Retrieve a contacts notes
+
+  ## Examples
+      iex> ActiveCampaign.Contact.get_notes(123)
+      {:ok, %{"notes" => []}}
+  """
+  @spec get_notes(integer()) :: {:ok, map()} | {:error, any()}
+  def get_notes(id) do
+    contact_get("#{id}/notes")
+  end
+
+  @doc """
+  Retrieve a contacts organization
+  """
+  @spec get_organization(integer()) :: {:ok, map()} | {:error, any()}
+  def get_organization(id) do
+    contact_get("#{id}/organization ")
+  end
+
+  @doc """
+  Retrieve a contacts plus append
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_plus_append(123)
+      {:ok, %{}}
+  """
+  @spec get_plus_append(integer()) :: {:ok, map()} | {:error, any()}
+  def get_plus_append(id) do
+    contact_get("#{id}/plusAppend")
+  end
+
+  @doc """
+  Retrieve a contacts tracking logs
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_tracking_logs(123)
+      {:ok, %{"trackingLogs" => []}}
+  """
+  @spec get_tracking_logs(integer()) :: {:ok, map()} | {:error, any()}
+  def get_tracking_logs(id) do
+    contact_get("#{id}/trackingLogs")
+  end
+
+  @doc """
+  Retrieve a contacts account contacts
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_account_contacts(123)
+      {:ok, %{"accountContacts" => []}}
+  """
+  @spec get_account_contacts(integer) :: {:ok, map()} | {:error, any()}
+  def get_account_contacts(id) do
+    contact_get("#{id}/accountContacts")
+  end
+
+  @doc """
+  Retrieve a contacts automation entry counts
+
+  ## Examples
+
+      iex> ActiveCampaign.Contact.get_automation_entry_counts(123)
+      {:ok, %{"automationEntryCounts" => []}}
+  """
+  @spec get_automation_entry_counts(integer()) :: {:ok, map()} | {:error, any()}
+  def get_automation_entry_counts(id) do
+    contact_get("#{id}/automationEntryCounts")
+  end
+
+  defp contact_get(url_path) do
+    Http.get("contacts/" <> url_path)
+  end
+end
