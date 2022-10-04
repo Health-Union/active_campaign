@@ -54,11 +54,11 @@ defmodule ActiveCampaign.List do
 
   ## Examples
 
-      iex> ActiveCampaign.List.get()
+      iex> ActiveCampaign.List.list()
       {:ok, %{"lists" => []}}
   """
-  @spec get :: {:ok, map()} | {:error, any()}
-  def get do
+  @spec list :: {:ok, map()} | {:error, any()}
+  def list do
     Http.get("lists")
   end
 

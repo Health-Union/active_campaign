@@ -23,11 +23,11 @@ defmodule ActiveCampaign.Score do
 
   ## Examples
 
-      iex> ActiveCampaign.Score.get()
+      iex> ActiveCampaign.Score.list()
       {:ok, %{"meta" => %{"total" => "2"}, "scores" => [...]}}
   """
-  @spec get :: {:ok, map()} | {:error, any()}
-  def get do
+  @spec list :: {:ok, map()} | {:error, any()}
+  def list do
     Http.get("scores")
   end
 end
