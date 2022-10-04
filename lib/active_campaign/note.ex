@@ -51,8 +51,8 @@ defmodule ActiveCampaign.Note do
       {:ok, %{"note" => %{...}}}
   """
   @spec update(integer(), map()) :: {:ok, map()} | {:error, any()}
-  def update(id, data) do
-    Http.put("notes/#{id}")
+  def update(id, note) do
+    Http.put("notes/#{id}", %{note: note})
   end
 
   @doc """
