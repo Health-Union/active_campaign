@@ -24,6 +24,7 @@ defmodule ActiveCampaign.MixProject do
   defp deps do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.28.5", only: :dev, runtime: false},
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.4"}
     ]
