@@ -13,7 +13,7 @@ defmodule ActiveCampaign.Deal do
       iex> ActiveCampaign.Deal.create(%{contact: "51", ...})
       {:ok, %{...}}
   """
-  @spec create :: {:ok, map()} | {:error, any()}
+  @spec create(map()) :: {:ok, map()} | {:error, any()}
   def create(deal) do
     Http.post("deals", %{deal: deal})
   end
@@ -65,7 +65,7 @@ defmodule ActiveCampaign.Deal do
       iex> ActiveCampaign.Deal.list()
       {:ok, %{...}}
   """
-  @spec list :: {:ok, map()} | {:error, any()}
+  @spec list(map()) :: {:ok, map()} | {:error, any()}
   def list(query) do
     query = URI.encode_query(query)
     Http.get("deals?#{query}")

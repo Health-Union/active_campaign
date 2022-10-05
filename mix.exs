@@ -10,7 +10,8 @@ defmodule ActiveCampaign.MixProject do
       version: @version,
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package()
     ]
   end
 
@@ -22,6 +23,7 @@ defmodule ActiveCampaign.MixProject do
 
   defp deps do
     [
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:httpoison, "~> 1.8"},
       {:jason, "~> 1.4"}
     ]

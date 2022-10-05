@@ -20,6 +20,11 @@ defmodule ActiveCampaign.Http do
     request(:put, url_path, body)
   end
 
+  @spec patch(String.t(), any()) :: {:ok, any()} | {:error, any()}
+  def patch(url_path, body) do
+    request(:patch, url_path, body)
+  end
+
   @spec get(String.t()) :: {:ok, any()} | {:error, any()}
   def get(url_path) do
     request(:get, url_path)
