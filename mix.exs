@@ -11,6 +11,7 @@ defmodule ActiveCampaign.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      docs: docs(),
       package: package()
     ]
   end
@@ -37,6 +38,52 @@ defmodule ActiveCampaign.MixProject do
       maintainers: ["Steve DeGele"],
       licenses: ["MIT"],
       links: %{"GitHub" => @source_url}
+    ]
+  end
+
+  defp docs do
+    [
+      extras: [
+        "LICENSE": [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      groups_for_modules: [
+        Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Http],
+        # "Accounts": [],
+        # "Addresses": [],
+        # "Automations": [],
+        # "Branding": [],
+        # "Calendar Feeds": [],
+        # "Campaigns": [],
+        Contacts: [
+          ActiveCampaign.Contact,
+          ActiveCampaign.Contact.Status,
+          ActiveCampaign.Contact.CustomFieldValue
+        ],
+        # "Custom Objects": [],
+        Deals: [ActiveCampaign.Deal, ActiveCampaign.Deal.Status],
+        # "Deepdata Integrations": [],
+        # "Forms": [],
+        Lists: [ActiveCampaign.List],
+        Notes: [ActiveCampaign.Note],
+        # "Saved Responses": [],
+        Scores: [ActiveCampaign.Score]
+        # "Segments": [],
+        # "Settings": [],
+        # "Site & Event Tracking": [],
+        # "Tags": [],
+        # "Tasks": [],
+        # "Task Outcomes": [],
+        # "Task Types": [],
+        # "Task Types and Outcomes Relations": [],
+        # "Task Reminders/Notifications": [],
+        # "Templates": [],
+        # "Users": [],
+        # "Webhooks": []
+      ],
+      main: "readme",
+      source_url: @source_url,
+      formatters: ["html"]
     ]
   end
 end
