@@ -68,7 +68,12 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.CustomObject.Record,
           ActiveCampaign.CustomObject.Schema
         ],
-        Deals: [ActiveCampaign.Deal, ActiveCampaign.Deal.Status],
+        Deals: [
+          ActiveCampaign.Deal,
+          ActiveCampaign.Deal.Group,
+          ActiveCampaign.Deal.Stage,
+          ActiveCampaign.Deal.Status
+        ],
         # "Deepdata Integrations": [],
         # "Forms": [],
         Lists: [ActiveCampaign.List],
