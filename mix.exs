@@ -96,9 +96,9 @@ defmodule ActiveCampaign.MixProject do
         # "Task Types": [],
         # "Task Types and Outcomes Relations": [],
         # "Task Reminders/Notifications": [],
-        Templates: [ActiveCampaign.Template]
+        Templates: [ActiveCampaign.Template],
         # "Users": [],
-        # "Webhooks": []
+        Webhooks: [ActiveCampaign.Webhook]
       ],
       main: "readme",
       source_url: @source_url,
