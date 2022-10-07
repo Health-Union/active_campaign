@@ -52,4 +52,20 @@ defmodule ActiveCampaign.CustomObject.Schema do
   def delete_field(schema_id, field_id) do
     Http.delete("customObjects/schemas/#{schema_id}/fields/#{field_id}")
   end
+
+  @doc """
+  Create a public schema
+  """
+  @spec create_public_schema(map()) :: {:ok, map()} | {:error, any()}
+  def create_public_schema(schema) do
+    Http.post("customObjects/schemas/public", %{schema: schema})
+  end
+
+  @doc """
+  Create a public schema
+  """
+  @spec create_child_schema(integer()) :: {:ok, map()} | {:error, any()}
+  def create_child_schema(id) do
+    Http.post("customObjects/schemas/#{id}/child")
+  end
 end

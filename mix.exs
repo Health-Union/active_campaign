@@ -65,6 +65,7 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Contact.Tag
         ],
         "Custom Objects": [
+          ActiveCampaign.CustomObject.Record,
           ActiveCampaign.CustomObject.Schema
         ],
         Deals: [ActiveCampaign.Deal, ActiveCampaign.Deal.Status],

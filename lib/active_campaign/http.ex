@@ -11,7 +11,7 @@ defmodule ActiveCampaign.Http do
   end
 
   @spec post(String.t(), any()) :: {:ok, any()} | {:error, any()}
-  def post(url_path, body) do
+  def post(url_path, body \\ "") do
     request(:post, url_path, body)
   end
 
