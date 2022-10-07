@@ -74,6 +74,7 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Deal.Field,
           ActiveCampaign.Deal.FieldValue,
           ActiveCampaign.Deal.Group,
+          ActiveCampaign.Deal.Role,
           ActiveCampaign.Deal.Stage,
           ActiveCampaign.Deal.Status
         ],
