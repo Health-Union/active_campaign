@@ -90,8 +90,8 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Tracking.Event,
           ActiveCampaign.Tracking.Site
         ],
-        Tags: [ActiveCampaign.Tag]
-        # "Tasks": [],
+        Tags: [ActiveCampaign.Tag],
+        Tasks: [ActiveCampaign.Task]
         # "Task Outcomes": [],
         # "Task Types": [],
         # "Task Types and Outcomes Relations": [],
