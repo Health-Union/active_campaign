@@ -79,7 +79,7 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Deal.Status
         ],
         # "Deepdata Integrations": [],
-        # "Forms": [],
+        Forms: [ActiveCampaign.Form],
         Lists: [ActiveCampaign.List],
         Notes: [ActiveCampaign.Note],
         # "Saved Responses": [],
