@@ -11,7 +11,7 @@ defmodule ActiveCampaign.Automation do
   ## Examples
 
       iex> ActiveCampaign.Automation.list()
-      {:ok, %{"automations" => [%{...}, ...]}}
+      {:ok, %{"automations" => [%{...}, ...], "meta" => %{...}}}
   """
   @spec list :: {:ok, map()} | {:error, any()}
   def list do

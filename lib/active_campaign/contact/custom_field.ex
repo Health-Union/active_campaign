@@ -1,4 +1,8 @@
 defmodule ActiveCampaign.Contact.CustomField do
+  @moduledoc """
+  Documentation for `ActiveCampaign.Contact.CustomField`.
+  """
+
   alias ActiveCampaign.Http
 
   @doc """

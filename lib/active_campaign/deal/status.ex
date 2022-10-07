@@ -2,6 +2,7 @@ defmodule ActiveCampaign.Deal.Status do
   @moduledoc """
   A deal's status is represented by an integer constant.
   """
+
   @open 0
   @won 1
   @lost 2

@@ -1,4 +1,8 @@
 defmodule ActiveCampaign.Contact.Automation do
+  @moduledoc """
+  Documentation for `ActiveCampaign.Contact.Automation`.
+  """
+
   alias ActiveCampaign.Http
 
   @doc """

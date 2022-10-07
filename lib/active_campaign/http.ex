@@ -30,6 +30,32 @@ defmodule ActiveCampaign.Http do
     request(:get, url_path)
   end
 
+  @doc """
+  Encodes URL query params.
+
+  This differs from `URI.encode_query/2` in the following ways:
+  - It will encode nested maps
+  - It always assumes `:www_form` encoding
+  - It assumes keys do not need to be `:www_form` encoded
+
+  ## Examples
+
+      iex> iex> ActiveCampaign.Http.encode_query(%{a: %{b: :c}, d: :e})
+      "a[b]=c&d=e"
+  """
+  @spec encode_query(map()) :: String.t()
+  def encode_query(enumerable) do
+    Enum.map_join(enumerable, "&", &encode_kv_pair/1)
+  end
+
+  defp encode_kv_pair({key, value}) when is_map(value) do
+    Enum.map_join(value, "&", fn {k, v} -> encode_kv_pair({"#{key}[#{k}]", v}) end)
+  end
+
+  defp encode_kv_pair({key, value}) do
+    to_string(key) <> "=" <> URI.encode_www_form(to_string(value))
+  end
+
   defp request(method, url_path, body \\ "") do
     url = build_url(url_path)
     body = encode_body(body)
