@@ -48,7 +48,7 @@ defmodule ActiveCampaign.MixProject do
         "README.md": [title: "Overview"]
       ],
       groups_for_modules: [
-        Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Http],
+        Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Crud, ActiveCampaign.Http],
         # "Accounts": [],
         Addresses: [ActiveCampaign.Address],
         Automations: [ActiveCampaign.Automation],
@@ -97,7 +97,7 @@ defmodule ActiveCampaign.MixProject do
         # "Task Types and Outcomes Relations": [],
         # "Task Reminders/Notifications": [],
         Templates: [ActiveCampaign.Template],
-        # "Users": [],
+        Users: [ActiveCampaign.User],
         Webhooks: [ActiveCampaign.Webhook]
       ],
       main: "readme",
