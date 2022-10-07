@@ -76,5 +76,4 @@ defmodule ActiveCampaign.Contact.CustomField do
   def delete_field_relationship(field_relationship_id) do
     Http.delete("fieldRels/#{field_relationship_id}")
   end
-
 end

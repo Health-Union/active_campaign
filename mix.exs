@@ -44,21 +44,23 @@ defmodule ActiveCampaign.MixProject do
   defp docs do
     [
       extras: [
-        "LICENSE": [title: "License"],
+        LICENSE: [title: "License"],
         "README.md": [title: "Overview"]
       ],
       groups_for_modules: [
         Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Http],
         # "Accounts": [],
         # "Addresses": [],
-        # "Automations": [],
-        # "Branding": [],
+        Automations: [ActiveCampaign.Automation],
+        Branding: [ActiveCampaign.Branding],
         # "Calendar Feeds": [],
         # "Campaigns": [],
         Contacts: [
           ActiveCampaign.Contact,
-          ActiveCampaign.Contact.Status,
-          ActiveCampaign.Contact.CustomFieldValue
+          ActiveCampaign.Contact.Automation,
+          ActiveCampaign.Contact.CustomField,
+          ActiveCampaign.Contact.CustomFieldValue,
+          ActiveCampaign.Contact.Status
         ],
         # "Custom Objects": [],
         Deals: [ActiveCampaign.Deal, ActiveCampaign.Deal.Status],
