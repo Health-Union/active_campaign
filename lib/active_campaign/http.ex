@@ -42,10 +42,17 @@ defmodule ActiveCampaign.Http do
 
       iex> iex> ActiveCampaign.Http.encode_query(%{a: %{b: :c}, d: :e})
       "a[b]=c&d=e"
+
+      iex> ActiveCampaign.Http.encode_query(%{ids: [1, 2, 3]})
+      "ids[]=1&ids[]=2&ids[]=3"
   """
   @spec encode_query(map()) :: String.t()
   def encode_query(enumerable) do
     Enum.map_join(enumerable, "&", &encode_kv_pair/1)
+  end
+
+  defp encode_kv_pair({key, value}) when is_list(value) do
+    Enum.map_join(value, "&", fn v -> encode_kv_pair({"#{key}[]", v}) end)
   end
 
   defp encode_kv_pair({key, value}) when is_map(value) do

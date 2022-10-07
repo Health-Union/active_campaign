@@ -26,6 +26,7 @@ defmodule ActiveCampaign.Contact do
   @doc """
   Sync a contact's data
   """
+  @spec sync(map()) :: {:ok, map()} | {:error, any()}
   def sync(data) do
     Http.post("contacts/sync", %{contact: data})
   end
@@ -44,17 +45,8 @@ defmodule ActiveCampaign.Contact do
 
   @doc """
   Update list status for a contact
-
-  ## Examples
-
-      iex> ActiveCampaign.Contact.update_list_status(%{
-        list: 2,
-        contact: 1,
-        status: 1
-      })
-      # FIXME
-      {:ok, %{"message" => "Updated"}}
   """
+  @spec update_list_status(map()) :: {:ok, map()} | {:error, any()}
   def update_list_status(data) do
     Http.post("contactLists", %{"contactList" => data})
   end
@@ -62,6 +54,7 @@ defmodule ActiveCampaign.Contact do
   @doc """
   Update a contact
   """
+  @spec update(integer(), map()) :: {:ok, map()} | {:error, any()}
   def update(id, data) do
     Http.put("contacts/#{id}", %{contact: data})
   end
@@ -69,6 +62,7 @@ defmodule ActiveCampaign.Contact do
   @doc """
   Delete a contact
   """
+  @spec delete(integer()) :: {:ok, map()} | {:error, any()}
   def delete(id) do
     Http.delete("contacts/#{id}")
   end
@@ -76,51 +70,15 @@ defmodule ActiveCampaign.Contact do
   @doc """
   List, search, and filter contacts
   """
-  def search(data) do
-    # %{
-    #   ids: [1, 2, 3],
-    #   eamil: "",
-    #   email_like: "",
-    #   exclude: 1,
-    #   formid: 123,
-    #   id_greater: 2,
-    #   id_less: 5,
-    #   listid: 1,
-    #   search: "",
-    #   segmentid: 1,
-    #   seriesid: 1,
-    #   status: 1,
-    #   tagid: 1,
-    #   filters: %{
-    #     created_before: date,
-    #     created_after: date,
-    #     updated_before: date,
-    #     updated_after: date
-    #   },
-    #   waitid: 1,
-    #   orders: [
-    #     email: :asc,
-    #     first_name: :asc,
-    #     last_name: :asc,
-    #     name: :asc,
-    #     score: :asc
-    #   ],
-    #   in_group_lists: true
-    # }
-
-    query =
-      data
-      |> Enum.into([])
-      |> Kernel.++(Enum.into(data[:ids] || [], [], fn id -> {:"ids[]", id} end))
-      |> Keyword.drop([:ids])
-      |> URI.encode_query()
-
-    Http.get("contacts?#{query}")
+  @spec search(map()) :: {:ok, map()} | {:error, any()}
+  def search(query) do
+    Http.get("contacts?" <> Http.encode_query(query))
   end
 
   @doc """
   List all automations the contact is in
   """
+  @spec list_automations(integer()) :: {:ok, map()} | {:error, any()}
   def list_automations(id) do
     contact_get("#{id}/contactAutomations")
   end
@@ -128,6 +86,7 @@ defmodule ActiveCampaign.Contact do
   @doc """
   Retrieve a contact's score value
   """
+  @spec get_score(integer()) :: {:ok, map()} | {:error, any()}
   def get_score(id) do
     contact_get("#{id}/scoreValues")
   end
@@ -147,7 +106,6 @@ defmodule ActiveCampaign.Contact do
       iex> ActiveCampaign.Contact.bulk_import_status_list()
       {:ok, %{"outstanding" => [], "recentlyCompleted" => []}}
   """
-
   @spec bulk_import_status_list() :: {:ok, map()} | {:error, any()}
   def bulk_import_status_list do
     Http.get("import/bulk_import")
