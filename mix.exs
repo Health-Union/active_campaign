@@ -82,7 +82,7 @@ defmodule ActiveCampaign.MixProject do
         Forms: [ActiveCampaign.Form],
         Lists: [ActiveCampaign.List],
         Notes: [ActiveCampaign.Note],
-        # "Saved Responses": [],
+        "Saved Responses": [ActiveCampaign.SavedResponse],
         Scores: [ActiveCampaign.Score]
         # "Segments": [],
         # "Settings": [],
