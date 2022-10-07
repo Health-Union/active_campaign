@@ -36,7 +36,8 @@ defmodule ActiveCampaign.Http do
   This differs from `URI.encode_query/2` in the following ways:
   - It will encode nested maps
   - It always assumes `:www_form` encoding
-  - It assumes keys do not need to be `:www_form` encoded
+  - It assumes keys do not always need to be `:www_form` encoded
+  - It assume there are no maps inside lists when the map has 0 or more than 1 element
 
   ## Examples
 
@@ -56,11 +57,17 @@ defmodule ActiveCampaign.Http do
   end
 
   defp encode_kv_pair({key, value}) when is_map(value) do
-    Enum.map_join(value, "&", fn {k, v} -> encode_kv_pair({"#{key}[#{k}]", v}) end)
+    Enum.map_join(value, "&", fn {k, v} -> encode_kv_pair({"#{key}[#{encode_string(k)}]", v}) end)
   end
 
   defp encode_kv_pair({key, value}) do
-    to_string(key) <> "=" <> URI.encode_www_form(to_string(value))
+    to_string(key) <> "=" <> encode_string(value)
+  end
+
+  defp encode_string(str) do
+    str
+    |> to_string()
+    |> URI.encode_www_form()
   end
 
   defp request(method, url_path, body \\ "") do
