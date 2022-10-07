@@ -78,7 +78,7 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Deal.Stage,
           ActiveCampaign.Deal.Status
         ],
-        # "Deepdata Integrations": [],
+        "Deepdata Integrations": [ActiveCampaign.Connection],
         Forms: [ActiveCampaign.Form],
         Lists: [ActiveCampaign.List],
         Notes: [ActiveCampaign.Note],
@@ -95,7 +95,7 @@ defmodule ActiveCampaign.MixProject do
         # "Task Types and Outcomes Relations": [],
         # "Task Reminders/Notifications": [],
         Templates: [ActiveCampaign.Template],
-        Users: [ActiveCampaign.User],
+        Users: [ActiveCampaign.User, ActiveCampaign.Group],
         Webhooks: [ActiveCampaign.Webhook]
       ],
       main: "readme",
