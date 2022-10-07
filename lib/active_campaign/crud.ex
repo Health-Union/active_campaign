@@ -15,7 +15,7 @@ defmodule ActiveCampaign.Crud do
   def get(opts) do
     quote do
       @doc """
-      Retrieve a #{unquote(opts[:key])}
+      Retrieve a #{unquote(name(opts))}
       """
       @spec get(integer()) :: {:ok, map()} | {:error, any()}
       def get(id) do
@@ -27,7 +27,7 @@ defmodule ActiveCampaign.Crud do
   def create(opts) do
     quote do
       @doc """
-      Create a #{unquote(opts[:key])}
+      Create a #{unquote(name(opts))}
       """
       @spec create(map()) :: {:ok, map()} | {:error, any()}
       def create(unquote(Macro.var(opts[:key], nil))) do
@@ -41,7 +41,7 @@ defmodule ActiveCampaign.Crud do
   def update(opts) do
     quote do
       @doc """
-      Update a #{unquote(opts[:key])}
+      Update a #{unquote(name(opts))}
       """
       @spec update(integer(), map()) :: {:ok, map()} | {:error, any()}
       def update(id, unquote(Macro.var(opts[:key], nil))) do
@@ -55,7 +55,7 @@ defmodule ActiveCampaign.Crud do
   def delete(opts) do
     quote do
       @doc """
-      Delete a #{unquote(opts[:key])}
+      Delete a #{unquote(name(opts))}
       """
       @spec delete(integer()) :: {:ok, map()} | {:error, any()}
       def delete(id) do
@@ -67,12 +67,16 @@ defmodule ActiveCampaign.Crud do
   def list(opts) do
     quote do
       @doc """
-      List all #{unquote(opts[:key])}s
+      List all #{unquote(name(opts))}s
       """
       @spec list(map()) :: {:ok, map()} | {:error, any()}
       def list(query_params \\ %{}) do
         Http.get(unquote(opts[:endpoint]) <> "?" <> Http.encode_query(query_params))
       end
     end
+  end
+
+  defp name(opts) do
+    opts[:name] || opts[:key]
   end
 end

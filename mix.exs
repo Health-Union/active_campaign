@@ -91,9 +91,7 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Tracking.Site
         ],
         Tags: [ActiveCampaign.Tag],
-        Tasks: [ActiveCampaign.Task],
-        # "Task Outcomes": [],
-        # "Task Types": [],
+        Tasks: [ActiveCampaign.Task, ActiveCampaign.Task.Outcome, ActiveCampaign.Task.Type],
         # "Task Types and Outcomes Relations": [],
         # "Task Reminders/Notifications": [],
         Templates: [ActiveCampaign.Template],
