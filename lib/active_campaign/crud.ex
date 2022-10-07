@@ -19,7 +19,7 @@ defmodule ActiveCampaign.Crud do
       """
       @spec get(integer()) :: {:ok, map()} | {:error, any()}
       def get(id) do
-        Http.post(unquote(opts[:endpoint]) <> "/" <> to_string(id))
+        Http.get(unquote(opts[:endpoint]) <> "/" <> to_string(id))
       end
     end
   end
@@ -70,8 +70,8 @@ defmodule ActiveCampaign.Crud do
       List all #{unquote(opts[:key])}s
       """
       @spec list(map()) :: {:ok, map()} | {:error, any()}
-      def list(query_params) do
-        Http.delete(unquote(opts[:endpoint]) <> "?" <> Http.encode_query(query_params))
+      def list(query_params \\ %{}) do
+        Http.get(unquote(opts[:endpoint]) <> "?" <> Http.encode_query(query_params))
       end
     end
   end
