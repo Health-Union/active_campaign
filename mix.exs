@@ -50,7 +50,7 @@ defmodule ActiveCampaign.MixProject do
       groups_for_modules: [
         Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Http],
         # "Accounts": [],
-        # "Addresses": [],
+        Addresses: [ActiveCampaign.Address],
         Automations: [ActiveCampaign.Automation],
         Branding: [ActiveCampaign.Branding],
         # "Calendar Feeds": [],
@@ -60,9 +60,13 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Contact.Automation,
           ActiveCampaign.Contact.CustomField,
           ActiveCampaign.Contact.CustomFieldValue,
-          ActiveCampaign.Contact.Status
+          ActiveCampaign.Contact.EmailActivity,
+          ActiveCampaign.Contact.Status,
+          ActiveCampaign.Contact.Tag
         ],
-        # "Custom Objects": [],
+        "Custom Objects": [
+          ActiveCampaign.CustomObject.Schema
+        ],
         Deals: [ActiveCampaign.Deal, ActiveCampaign.Deal.Status],
         # "Deepdata Integrations": [],
         # "Forms": [],
