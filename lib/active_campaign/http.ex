@@ -89,8 +89,12 @@ defmodule ActiveCampaign.Http do
     ["Api-Token": Config.api_key()]
   end
 
-  defp parse_response({:ok, %{body: body}}) do
-    Jason.decode(body)
+  defp parse_response({:ok, %{body: body, headers: headers}}) do
+    if {"Content-Type", "application/json"} in headers do
+      Jason.decode(body)
+    else
+      {:ok, body}
+    end
   end
 
   defp build_url(url_path) do

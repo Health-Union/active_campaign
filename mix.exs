@@ -85,8 +85,11 @@ defmodule ActiveCampaign.MixProject do
         "Saved Responses": [ActiveCampaign.SavedResponse],
         Scores: [ActiveCampaign.Score],
         Segments: [ActiveCampaign.Segment],
-        Settings: [ActiveCampaign.Setting]
-        # "Site & Event Tracking": [],
+        Settings: [ActiveCampaign.Setting],
+        "Site & Event Tracking": [
+          ActiveCampaign.Tracking.Event,
+          ActiveCampaign.Tracking.Site
+        ]
         # "Tags": [],
         # "Tasks": [],
         # "Task Outcomes": [],
