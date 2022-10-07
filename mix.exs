@@ -70,6 +70,7 @@ defmodule ActiveCampaign.MixProject do
         ],
         Deals: [
           ActiveCampaign.Deal,
+          ActiveCampaign.Deal.Contact,
           ActiveCampaign.Deal.Field,
           ActiveCampaign.Deal.FieldValue,
           ActiveCampaign.Deal.Group,
