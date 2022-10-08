@@ -48,7 +48,12 @@ defmodule ActiveCampaign.MixProject do
         "README.md": [title: "Overview"]
       ],
       groups_for_modules: [
-        Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Crud, ActiveCampaign.Http],
+        Base: [
+          ActiveCampaign,
+          ActiveCampaign.Config,
+          ActiveCampaign.Crud,
+          ActiveCampaign.Http
+        ],
         Accounts: [
           ActiveCampaign.Account,
           ActiveCampaign.Account.Contact,
@@ -107,11 +112,14 @@ defmodule ActiveCampaign.MixProject do
         Tasks: [
           ActiveCampaign.Task,
           ActiveCampaign.Task.Outcome,
-          ActiveCampaign.Task.Type,
+          ActiveCampaign.Task.Type
+        ],
+        "Task Types and Outcomes Relations": [
           ActiveCampaign.Task.TypeOutcomeRelation
         ],
-        # "Task Types and Outcomes Relations": [],
-        # "Task Reminders/Notifications": [],
+        "Task Reminders/Notifications": [
+          ActiveCampaign.Task.Reminder
+        ],
         Templates: [ActiveCampaign.Template],
         Users: [ActiveCampaign.User, ActiveCampaign.Group],
         Webhooks: [ActiveCampaign.Webhook]
