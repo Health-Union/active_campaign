@@ -15,7 +15,7 @@ First, add the ActiveCampaign package to your `mix.exs` dependencies:
 ```elixir
 def deps do
   [
-    {:active_campaign, "~> 0.1.0"}
+    {:active_campaign, "~> 0.2.0"}
   ]
 end
 ```
