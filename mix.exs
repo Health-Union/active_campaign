@@ -49,7 +49,11 @@ defmodule ActiveCampaign.MixProject do
       ],
       groups_for_modules: [
         Base: [ActiveCampaign, ActiveCampaign.Config, ActiveCampaign.Crud, ActiveCampaign.Http],
-        # "Accounts": [],
+        Accounts: [
+          ActiveCampaign.Account,
+          ActiveCampaign.Account.Contact,
+          ActiveCampaign.Account.Field
+        ],
         Addresses: [ActiveCampaign.Address],
         Automations: [ActiveCampaign.Automation],
         Branding: [ActiveCampaign.Branding],
