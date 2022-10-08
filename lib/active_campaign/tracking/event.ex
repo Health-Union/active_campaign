@@ -5,7 +5,7 @@ defmodule ActiveCampaign.Tracking.Event do
 
   alias ActiveCampaign.Http
 
-  # FIXME endpoint is https://trackcmp.net/event ?
+  # TODO endpoint is https://trackcmp.net/event ?
   # @doc """
   # Track event
   # """
