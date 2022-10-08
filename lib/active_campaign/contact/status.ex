@@ -2,6 +2,7 @@ defmodule ActiveCampaign.Contact.Status do
   @moduledoc """
   A contact's status is represented by an integer constant.
   """
+
   @any -1
   @unconfirmed 0
   @active 1

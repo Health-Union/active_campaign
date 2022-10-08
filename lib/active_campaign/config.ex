@@ -2,6 +2,7 @@ defmodule ActiveCampaign.Config do
   @moduledoc """
   Configuration helper.
   """
+
   @api_version_path "/api/3/"
 
   def api_key do

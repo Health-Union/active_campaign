@@ -52,14 +52,22 @@ defmodule ActiveCampaign.List do
   @doc """
   Retrieve all lists
 
+  The number of lists returned defaults to 20, and can be changed with a limit parameter.
+
   ## Examples
 
       iex> ActiveCampaign.List.list()
-      {:ok, %{"lists" => []}}
+      {:ok, %{"lists" => [...]}}
+
+      iex> ActiveCampaign.List.list(%{limit: 1})
+      {:ok, %{"lists" => [%{...}]}}
+
+      iex> ActiveCampaign.List.list(%{"filters[name]" => "blue"})
+      {:ok, %{"lists" => [%{"name" => "Blue Team", ...}, ...]}}
   """
-  @spec list :: {:ok, map()} | {:error, any()}
-  def list do
-    Http.get("lists")
+  @spec list(map()) :: {:ok, map()} | {:error, any()}
+  def list(params \\ %{}) do
+    Http.get("lists?#{URI.encode_query(params)}")
   end
 
   @doc """
