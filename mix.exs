@@ -52,7 +52,8 @@ defmodule ActiveCampaign.MixProject do
         Accounts: [
           ActiveCampaign.Account,
           ActiveCampaign.Account.Contact,
-          ActiveCampaign.Account.Field
+          ActiveCampaign.Account.Field,
+          ActiveCampaign.Account.FieldValue
         ],
         Addresses: [ActiveCampaign.Address],
         Automations: [ActiveCampaign.Automation],
