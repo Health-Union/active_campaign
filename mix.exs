@@ -58,7 +58,7 @@ defmodule ActiveCampaign.MixProject do
         Addresses: [ActiveCampaign.Address],
         Automations: [ActiveCampaign.Automation],
         Branding: [ActiveCampaign.Branding],
-        # "Calendar Feeds": [],
+        "Calendar Feeds": [ActiveCampaign.CalendarFeed],
         # "Campaigns": [],
         Contacts: [
           ActiveCampaign.Contact,
