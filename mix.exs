@@ -59,7 +59,10 @@ defmodule ActiveCampaign.MixProject do
         Automations: [ActiveCampaign.Automation],
         Branding: [ActiveCampaign.Branding],
         "Calendar Feeds": [ActiveCampaign.CalendarFeed],
-        # "Campaigns": [],
+        Campaigns: [
+          ActiveCampaign.Campaign,
+          ActiveCampaign.Message
+        ],
         Contacts: [
           ActiveCampaign.Contact,
           ActiveCampaign.Contact.Automation,
@@ -83,7 +86,10 @@ defmodule ActiveCampaign.MixProject do
           ActiveCampaign.Deal.Stage,
           ActiveCampaign.Deal.Status
         ],
-        "Deepdata Integrations": [ActiveCampaign.Connection],
+        "Deepdata Integrations": [
+          ActiveCampaign.Connection,
+          ActiveCampaign.Ecom.Customer
+        ],
         Forms: [ActiveCampaign.Form],
         Lists: [ActiveCampaign.List],
         Notes: [ActiveCampaign.Note],
