@@ -15,7 +15,7 @@ defmodule ActiveCampaign.Crud do
   def get(opts) do
     quote do
       @doc """
-      Retrieve a #{unquote(name(opts))}
+      Retrieve a#{unquote(an(opts))} #{unquote(name(opts))}
       """
       @spec get(integer()) :: {:ok, map()} | {:error, any()}
       def get(id) do
@@ -27,7 +27,7 @@ defmodule ActiveCampaign.Crud do
   def create(opts) do
     quote do
       @doc """
-      Create a #{unquote(name(opts))}
+      Create a#{unquote(an(opts))} #{unquote(name(opts))}
       """
       @spec create(map()) :: {:ok, map()} | {:error, any()}
       def create(unquote(Macro.var(opts[:key], nil))) do
@@ -41,7 +41,7 @@ defmodule ActiveCampaign.Crud do
   def update(opts) do
     quote do
       @doc """
-      Update a #{unquote(name(opts))}
+      Update a#{unquote(an(opts))} #{unquote(name(opts))}
       """
       @spec update(integer(), map()) :: {:ok, map()} | {:error, any()}
       def update(id, unquote(Macro.var(opts[:key], nil))) do
@@ -55,7 +55,7 @@ defmodule ActiveCampaign.Crud do
   def delete(opts) do
     quote do
       @doc """
-      Delete a #{unquote(name(opts))}
+      Delete a#{unquote(an(opts))} #{unquote(name(opts))}
       """
       @spec delete(integer()) :: {:ok, map()} | {:error, any()}
       def delete(id) do
@@ -78,5 +78,15 @@ defmodule ActiveCampaign.Crud do
 
   defp name(opts) do
     opts[:name] || opts[:key]
+  end
+
+  defp an(opts) do
+    case name(opts) do
+      <<char::binary-size(1)>> <> _rest when char in ~w(a e i o) ->
+        "n"
+
+      _ ->
+        ""
+    end
   end
 end

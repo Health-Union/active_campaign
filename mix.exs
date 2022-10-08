@@ -88,7 +88,9 @@ defmodule ActiveCampaign.MixProject do
         ],
         "Deepdata Integrations": [
           ActiveCampaign.Connection,
-          ActiveCampaign.Ecom.Customer
+          ActiveCampaign.Ecom.Customer,
+          ActiveCampaign.Ecom.Order,
+          ActiveCampaign.Ecom.OrderProduct
         ],
         Forms: [ActiveCampaign.Form],
         Lists: [ActiveCampaign.List],
