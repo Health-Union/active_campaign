@@ -17,4 +17,8 @@ defmodule ActiveCampaign.Config do
     |> Application.get_env(:api_url)
     |> URI.merge(@api_version_path)
   end
+
+  def json_library do
+    Application.get_env(:active_campaign, :json_library, Jason)
+  end
 end

@@ -31,3 +31,23 @@ config :active_campaign,
   api_key: "myApiKey",
   api_url: "https://example.api-us1.com"
 ```
+
+## JSON support
+
+ActiveCampaign comes with JSON support out of the box via the [Jason](https://github.com/michalmuskala/jason) library. To use it, add `:jason` to your dependencies:
+
+```elixir
+{:jason, "~> 1.0"}
+```
+
+You can customize it to use another library via the `:json_library` configuration:
+
+```elixir
+config :active_campaign, :json_library, SomeOtherLib
+```
+
+Once you change the value, you have to recompile ActiveCampaign, which can be done by cleaning its current build:
+
+```sh
+mix deps.clean active_campaign --build
+```

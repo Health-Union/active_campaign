@@ -327,7 +327,7 @@ defmodule ActiveCampaign.Contact do
 
   # there are some endpoints that should return application/json content types, but don't
   defp parse_json({:ok, str}) when is_binary(str) do
-    Jason.decode(str)
+    ActiveCampaign.Config.json_library().decode(str)
   end
 
   defp parse_json(response), do: response
