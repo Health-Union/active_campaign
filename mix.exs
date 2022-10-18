@@ -2,13 +2,13 @@ defmodule ActiveCampaign.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Health-Union/active_campaign"
-  @version "0.2.0"
+  @version "0.2.1"
 
   def project do
     [
       app: :active_campaign,
       version: @version,
-      elixir: "~> 1.13",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
@@ -26,8 +26,8 @@ defmodule ActiveCampaign.MixProject do
     [
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.28.5", only: :dev, runtime: false},
-      {:httpoison, "~> 1.8"},
-      {:jason, "~> 1.4"}
+      {:httpoison, "~> 1.4"},
+      {:jason, "~> 1.0", optional: true}
     ]
   end
 

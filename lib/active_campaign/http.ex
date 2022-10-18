@@ -80,7 +80,7 @@ defmodule ActiveCampaign.Http do
   end
 
   defp encode_body(body) when is_map(body) do
-    Jason.encode!(body)
+    Config.json_library().encode!(body)
   end
 
   defp encode_body(body), do: body
@@ -91,7 +91,7 @@ defmodule ActiveCampaign.Http do
 
   defp parse_response({:ok, %{body: body, headers: headers}}) do
     if {"Content-Type", "application/json"} in headers do
-      Jason.decode(body)
+      Config.json_library().decode(body)
     else
       {:ok, body}
     end
