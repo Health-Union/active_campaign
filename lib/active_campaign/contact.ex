@@ -36,11 +36,11 @@ defmodule ActiveCampaign.Contact do
 
   ## Examples
       iex> ActiveCampaign.Contact.get(123)
-      {:ok, %{"contactDatum" => %{...}}}
+      {:ok, %{"contactAutomations" => [...], "contactLists" => [...], ...}}
   """
   @spec get(integer()) :: {:ok, map()} | {:error, any()}
   def get(id) do
-    contact_get("#{id}/contactData")
+    contact_get(to_string(id))
   end
 
   @doc """
