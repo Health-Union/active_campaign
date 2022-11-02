@@ -94,9 +94,9 @@ defmodule ActiveCampaign.Contact do
   @doc """
   Bulk import contacts
   """
-  @spec bulk_import(list(map())) :: {:ok, map()} | {:error, any()}
-  def bulk_import(contacts) do
-    Http.post("import/bulk_import", %{contacts: contacts})
+  @spec bulk_import(list(map()), map()) :: {:ok, map()} | {:error, any()}
+  def bulk_import(contacts, callback \\ %{}) do
+    Http.post("import/bulk_import", %{contacts: contacts, callback: callback})
   end
 
   @doc """

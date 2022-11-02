@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### Enhancements
+
+* Support optional callback arg for `ActiveCampaign.Contact.bulk_import/2`
+
 ## 0.2.1
 
 ### Enhancements
