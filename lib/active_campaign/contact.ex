@@ -36,11 +36,11 @@ defmodule ActiveCampaign.Contact do
 
   ## Examples
       iex> ActiveCampaign.Contact.get(123)
-      {:ok, %{"contactDatum" => %{...}}}
+      {:ok, %{"contactAutomations" => [...], "contactLists" => [...], ...}}
   """
   @spec get(integer()) :: {:ok, map()} | {:error, any()}
   def get(id) do
-    contact_get("#{id}/contactData")
+    contact_get(to_string(id))
   end
 
   @doc """
@@ -93,10 +93,42 @@ defmodule ActiveCampaign.Contact do
 
   @doc """
   Bulk import contacts
+
+  ## Examples
+
+      iex> contacts = [
+          %{
+            email: "oscar.b@example.com",
+            subscribe: [
+              %{listid: 26}
+            ]
+          }
+        ]
+      iex> callback = %{
+          url: "https://example.com/webhooks/active-campaign/bulk-import",
+          requestType: "POST",
+          detailed_results: "false",
+          params: [
+            %{key: "param-key", value: "param-value"}
+          ],
+          headers: [
+            %{key: "header-key", value: "header-value"}
+          ]
+        }
+      iex> ActiveCampaign.Contact.bulk_import(contacts, callback)
+      {:ok,
+       %{
+         "batchId" => "e496235c-e7c4-4c8c-80ee-61975e9dc7f8",
+         "message" => "Contact import queued",
+         "queued_contacts" => 250,
+         "success" => 1
+       }}
   """
-  @spec bulk_import(list(map())) :: {:ok, map()} | {:error, any()}
-  def bulk_import(contacts) do
-    Http.post("import/bulk_import", %{contacts: contacts})
+  @spec bulk_import(list(map()), map()) :: {:ok, map()} | {:error, any()}
+  def bulk_import(contacts, callback \\ %{}) do
+    "import/bulk_import"
+    |> Http.post(%{contacts: contacts, callback: callback})
+    |> parse_json()
   end
 
   @doc """

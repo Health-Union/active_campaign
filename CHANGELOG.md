@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.2
+
+### Enhancements
+
+* Support optional callback arg for `ActiveCampaign.Contact.bulk_import/2`
+
+### Fixes
+
+* Fix `ActiveCampaign.Contact.get/1`. It was previously returning the same results from `ActiveCampaign.Contact.get_data/1`
+
 ## 0.2.1
 
 ### Enhancements
