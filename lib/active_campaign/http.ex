@@ -75,7 +75,7 @@ defmodule ActiveCampaign.Http do
     body = encode_body(body)
 
     method
-    |> Config.json_library().request(url, body, headers())
+    |> Config.http_library().request(url, body, headers())
     |> parse_response()
   end
 
