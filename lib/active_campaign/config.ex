@@ -21,4 +21,8 @@ defmodule ActiveCampaign.Config do
   def json_library do
     Application.get_env(:active_campaign, :json_library, Jason)
   end
+
+  def http_library do
+    Application.get_env(:active_campaign, :http_library, HTTPoison)
+  end
 end
