@@ -32,6 +32,21 @@ config :active_campaign,
   api_url: "https://example.api-us1.com"
 ```
 
+## HTTP Library
+ActiveCampagin comes with [HTTPoison](https://github.com/edgurgel/httpoison) as the default HTTP library. To use it, add `:httpoison` to your dependencies:
+
+```elixir
+{:httpoison, "~> 1.4"},
+```
+
+You can customize it to use another library via the `:http_library` configuration:
+
+```elixir
+config :active_campaign, :http_library, SomeOtherLib
+```
+
+This is useful for mocking responses when testing.
+
 ## JSON support
 
 ActiveCampaign comes with JSON support out of the box via the [Jason](https://github.com/michalmuskala/jason) library. To use it, add `:jason` to your dependencies:

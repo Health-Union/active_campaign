@@ -45,6 +45,10 @@ defmodule ActiveCampaign.Contact do
 
   @doc """
   Update list status for a contact
+
+  ## Examples
+      iex> AC.Contact.update_list_status(%{list: 1, contact: 22, status: ActiveCampaign.Contact.Status.active()})
+      {:ok, %{"contactList" => %{...}, "contacts" => [...]}}
   """
   @spec update_list_status(map()) :: {:ok, map()} | {:error, any()}
   def update_list_status(data) do
@@ -53,6 +57,9 @@ defmodule ActiveCampaign.Contact do
 
   @doc """
   Update a contact
+
+  iex> ActiveCampaign.Contact.update(123, %{email: "john@example.com"})
+  {:ok, %{"contact" => %{...}}
   """
   @spec update(integer(), map()) :: {:ok, map()} | {:error, any()}
   def update(id, data) do

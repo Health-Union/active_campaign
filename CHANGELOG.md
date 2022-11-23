@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.3
+
+### Enhancements
+
+* The `http_library` is configurable now, the default library is [HTTPoison](https://github.com/edgurgel/httpoison)
+* Some additional example responses in some function docs
+
 ## 0.2.2
 
 ### Enhancements
