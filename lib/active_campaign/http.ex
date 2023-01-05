@@ -97,6 +97,8 @@ defmodule ActiveCampaign.Http do
     end
   end
 
+  defp parse_response(error), do: error
+
   defp build_url(url_path) do
     Config.api_url()
     |> URI.merge(url_path)
