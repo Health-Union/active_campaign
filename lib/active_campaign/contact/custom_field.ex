@@ -51,8 +51,8 @@ defmodule ActiveCampaign.Contact.CustomField do
       {:ok, %{"fieldOptions" => [...], "fieldRels" => [...], "fields" => [...], "meta" => [...]}}
   """
   @spec list :: {:ok, map()} | {:error, any()}
-  def list do
-    Http.get("fields")
+  def list(query \\ %{}) do
+    Http.get("fields?" <> Http.encode_query(query))
   end
 
   @doc """

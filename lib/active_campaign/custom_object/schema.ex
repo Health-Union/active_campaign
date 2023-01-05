@@ -9,7 +9,7 @@ defmodule ActiveCampaign.CustomObject.Schema do
   List all schemas
   """
   @spec list(map()) :: {:ok, map()} | {:error, any()}
-  def list(query_params) do
+  def list(query_params \\ %{}) do
     Http.get("customObjects/schemas?" <> Http.encode_query(query_params))
   end
 
