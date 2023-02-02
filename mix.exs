@@ -2,7 +2,7 @@ defmodule ActiveCampaign.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/Health-Union/active_campaign"
-  @version "0.2.3"
+  @version "0.2.4"
 
   def project do
     [
