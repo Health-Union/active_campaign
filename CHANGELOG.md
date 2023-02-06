@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.4
+
+### Enhancements
+
+* The query argument for `ActiveCampaign.Contact.CustomField.list/1` is optional now
+* The query_params argument for `ActiveCampaign.CustomObject.Schema.list/1` is optional now
+
+### Potentially Breaking Changes
+* If Active Campaign HTTP requests return an error, such as a timeout, the error will now be returned instead of raising an exception. If your application relies on these exceptions for control flow or a retry mechanism, you should make changes.
+
+For example:
+
+```elixir
+case ActiveCampaign.Contact.search(%{limit: 10, offset: 0}) do
+  {:ok, response} -> # all good
+  error_response -> # raise my own exception here or handle failure state
+end
+```
+
 ## 0.2.3
 
 ### Enhancements
