@@ -47,6 +47,12 @@ config :active_campaign, :http_library, SomeOtherLib
 
 This is useful for mocking responses when testing.
 
+The HTTP library request options are also configurable:
+
+```elixir
+config :active_campaign, :http_options, [recv_timeout: 8000]
+```
+
 ## JSON support
 
 ActiveCampaign comes with JSON support out of the box via the [Jason](https://github.com/michalmuskala/jason) library. To use it, add `:jason` to your dependencies:

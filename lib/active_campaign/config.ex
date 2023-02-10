@@ -25,4 +25,8 @@ defmodule ActiveCampaign.Config do
   def http_library do
     Application.get_env(:active_campaign, :http_library, HTTPoison)
   end
+
+  def http_options do
+    Application.get_env(:active_campaign, :http_options, [])
+  end
 end

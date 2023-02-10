@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5
+
+### Enhancements
+
+* HTTP request options are now configurable.
+
 ## 0.2.4
 
 ### Enhancements
