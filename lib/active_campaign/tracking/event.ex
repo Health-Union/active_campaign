@@ -13,6 +13,7 @@ defmodule ActiveCampaign.Tracking.Event do
   @spec track(String.t(), String.t(), map()) :: {:ok, map()} | {:error, any()}
   def track(event, eventdata, visit) do
     visit_json = Config.json_library().encode!(visit)
+
     payload = %{
       "actid" => Config.actid(),
       "key" => Config.event_key(),
@@ -20,6 +21,7 @@ defmodule ActiveCampaign.Tracking.Event do
       "eventdata" => eventdata,
       "visit" => visit_json
     }
+
     header = ["Content-Type": "application/x-www-form-urlencoded"]
     response = Config.http_library().request(:post, @event_url, URI.encode_query(payload), header, Config.http_options())
     Http.parse_response(response)
