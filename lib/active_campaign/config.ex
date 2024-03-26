@@ -18,6 +18,14 @@ defmodule ActiveCampaign.Config do
     |> URI.merge(@api_version_path)
   end
 
+  def event_key do
+    Application.get_env(:active_campaign, :event_key)
+  end
+
+  def actid do
+    Application.get_env(:active_campaign, :actid)
+  end
+
   def json_library do
     Application.get_env(:active_campaign, :json_library, Jason)
   end

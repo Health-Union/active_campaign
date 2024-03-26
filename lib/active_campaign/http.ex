@@ -52,6 +52,16 @@ defmodule ActiveCampaign.Http do
     Enum.map_join(enumerable, "&", &encode_kv_pair/1)
   end
 
+  def parse_response({:ok, %{body: body, headers: headers}}) do
+    if {"Content-Type", "application/json"} in headers do
+      Config.json_library().decode(body)
+    else
+      {:ok, body}
+    end
+  end
+
+  def parse_response(error), do: error
+
   defp encode_kv_pair({key, value}) when is_list(value) do
     Enum.map_join(value, "&", fn v -> encode_kv_pair({"#{key}[]", v}) end)
   end
@@ -88,16 +98,6 @@ defmodule ActiveCampaign.Http do
   defp headers do
     ["Api-Token": Config.api_key()]
   end
-
-  defp parse_response({:ok, %{body: body, headers: headers}}) do
-    if {"Content-Type", "application/json"} in headers do
-      Config.json_library().decode(body)
-    else
-      {:ok, body}
-    end
-  end
-
-  defp parse_response(error), do: error
 
   defp build_url(url_path) do
     Config.api_url()
