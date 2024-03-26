@@ -12,7 +12,7 @@ defmodule ActiveCampaign.Tracking.Event do
   # """
   @spec track(String.t(), String.t(), map()) :: {:ok, map()} | {:error, any()}
   def track(event, eventdata, visit) do
-    visit_json = Jason.encode!(visit)
+    visit_json = Config.json_library().encode!(visit)
     payload = %{
       "actid" => Config.actid(),
       "key" => Config.event_key(),
