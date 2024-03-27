@@ -7,9 +7,9 @@ defmodule ActiveCampaign.Tracking.Event do
   alias ActiveCampaign.Http
   alias ActiveCampaign.Config
 
-  # @doc """
-  # Track event
-  # """
+  @doc """
+  Track event
+  """
   @spec track(String.t(), String.t(), map()) :: {:ok, map()} | {:error, any()}
   def track(event, eventdata, visit) do
     visit_json = Config.json_library().encode!(visit)
