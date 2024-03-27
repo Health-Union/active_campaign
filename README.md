@@ -32,6 +32,14 @@ config :active_campaign,
   api_url: "https://example.api-us1.com"
 ```
 
+If using the event tracking API, put your actid and event key in your `config.exs` file:
+
+```elixir
+config :active_campaign,
+  actid: "myActid",
+  event_key: "myEventKey"
+```
+
 ## HTTP Library
 ActiveCampagin comes with [HTTPoison](https://github.com/edgurgel/httpoison) as the default HTTP library. To use it, add `:httpoison` to your dependencies:
 
