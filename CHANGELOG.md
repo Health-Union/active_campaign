@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+### Enhancements
+
+* Add event tracking functionality.
+* Bumped ssl_verify_fun to 1.1.7
+
 ## 0.2.5
 
 ### Enhancements
