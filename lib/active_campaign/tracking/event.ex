@@ -2,28 +2,32 @@ defmodule ActiveCampaign.Tracking.Event do
   @moduledoc """
   Documentation for `ActiveCampaign.Tracking.Event`.
   """
-  @event_url "https://trackcmp.net/event"
 
   alias ActiveCampaign.Http
   alias ActiveCampaign.Config
 
   @doc """
-  Track event
+  Track an event
+
+  ## Example
+
+      iex> ActiveCampaign.Tracking.Event.track("login", "sso", %{email: "jane.d@email.com"})
+      {:ok, %{"message" => "Event spawned", "success" => 1}}
   """
   @spec track(String.t(), String.t(), map()) :: {:ok, map()} | {:error, any()}
-  def track(event, eventdata, visit) do
+  def track(event, event_data, visit) do
     visit_json = Config.json_library().encode!(visit)
 
     payload = %{
       "actid" => Config.actid(),
       "key" => Config.event_key(),
       "event" => event,
-      "eventdata" => eventdata,
+      "eventdata" => event_data,
       "visit" => visit_json
     }
 
-    header = ["Content-Type": "application/x-www-form-urlencoded"]
-    response = Config.http_library().request(:post, @event_url, URI.encode_query(payload), header, Config.http_options())
+    headers = ["Content-Type": "application/x-www-form-urlencoded"]
+    response = Config.http_library().request(:post, Config.event_endpoint(), URI.encode_query(payload), headers, Config.http_options())
     Http.parse_response(response)
   end
 

@@ -53,10 +53,11 @@ defmodule ActiveCampaign.Http do
   end
 
   def parse_response({:ok, %{body: body, headers: headers}}) do
-    if {"Content-Type", "application/json"} in headers do
-      Config.json_library().decode(body)
-    else
-      {:ok, body}
+    headers
+    |> Enum.find_value(fn {h, v} -> String.downcase(h) == "content-type" && String.downcase(v) end)
+    |> case do
+      "application/json" <> _ -> Config.json_library().decode(body)
+      _ -> {:ok, body}
     end
   end
 
