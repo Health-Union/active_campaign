@@ -11,8 +11,8 @@ defmodule ActiveCampaign.Tracking.Event do
 
   ## Example
 
-    iex> ActiveCampaign.Tracking.Event.track("login", "sso", %{email: "jane.d@email.com"})
-    {:ok, %{"message" => "Event spawned", "success" => 1}}
+      iex> ActiveCampaign.Tracking.Event.track("login", "sso", %{email: "jane.d@email.com"})
+      {:ok, %{"message" => "Event spawned", "success" => 1}}
   """
   @spec track(String.t(), String.t(), map()) :: {:ok, map()} | {:error, any()}
   def track(event, event_data, visit) do
