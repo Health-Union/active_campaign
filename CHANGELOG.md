@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.1
+
+### Enhancements
+
+* Event tracking endpoint is now configurable via `:event_endpoint`, allowing it to be changed for testing purposes.
+
+### Fixes
+
+* `ActiveCampaign.Tracking.Event.track/3` response json is now decoded.
+
 ## 0.3.0
 
 ### Enhancements
